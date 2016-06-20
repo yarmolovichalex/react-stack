@@ -2,6 +2,13 @@ import alt from '../alt';
 import Firebase from 'firebase';
 
 class Actions {
+	constructor() {
+		this.generateActions(
+			'channelsReceived',
+			'channelsFailed'
+		);
+	}
+
 	login(args) {
 		return (dispatch) => {
 			var config = {
@@ -15,7 +22,6 @@ class Actions {
 			var provider = new firebase.auth.GoogleAuthProvider();
 			provider.addScope('https://www.googleapis.com/auth/plus.login');
 			Firebase.auth().signInWithPopup(provider).then(function(result) {
-				debugger;
 				dispatch(result.user);
 			}).catch(function (error) {
 				return;
